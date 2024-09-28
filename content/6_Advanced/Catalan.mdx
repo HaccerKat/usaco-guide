@@ -1,12 +1,14 @@
 ---
-id: catalan
-title: 'Catalan Numbers'
-author: Mihnea Brebenel
-description: ''
+id: advanced-combo
+title: 'Advanced Combinatorics'
+author: Mihnea Brebenel, Peng Bai
+description: 'Counting, but harder'
 prerequisites:
   - combo
 frequency: 1
 ---
+
+# Catalan Numbers
 
 <Resources>
 	<Resource
@@ -205,6 +207,44 @@ else:
 
 </PySection>
 </LanguageSection>
+
+# Expected Powers
+
+Most problems want you to calculate $E[X]$, but what if a problem wants you to calculate $E[X^n]$ for some integer positive $n$? Remember from the [combinatorics](https://usaco.guide/gold/combo) module that $E[X^2] \neq E[X]^2$, so specialized techniques are required to solve these types of problems. This guide will show two of them.
+
+## Using the Ordered Pairs Techinque
+
+TODO
+
+## Using the Powers Technique
+
+Consider two independent random variables $X$ and $Y$. For now, we assume that $E[X^k]$ and $E[Y^k]$ are known for all $0 \leq k \leq n$. We intend to combine $X$ and $Y$, so we want to compute $E[(X + Y)^k]$ for all $0 \leq k \leq n$.
+
+Let's start with an example with $k = 3$.
+
+$E[(X + Y)^3] = E[X^3 + 3X^2Y + 3XY^2 + Y^3]$ by expanding and combining like terms.
+
+Due to linearity of expectation, $E[(X + Y)^3] = E[X^3] + E[3X^2Y] + E[3XY^2] + E[Y^3]$.
+
+Because $X$ and $Y$ are independent, $E[(X + Y)^3] = E[X^3] + 3\cdot E[X^2] \cdot E[Y] + 3\cdot E[X] \cdot E[Y^2] + E[Y^3]$.
+
+From the [binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem), the generalized formula is:
+
+$$
+E[(X+Y)^k] = \sum_{i=0}^k {k \choose i} \cdot E[X^i] \cdot E[Y^{k - i}]
+$$
+
+We now turn back to the intial assumption that $E[X^k]$ and $E[Y^k]$ are known for all $0 \leq k \leq n$. We can deal with this by breaking up a problem into subproblems where these values are known, then combine.
+
+<FocusProblem problem="sample2" />
+
+## Explanation using Ordered Pairs
+
+TODO
+
+## Explanation using Powers Technique
+
+TODO
 
 # Problems
 
